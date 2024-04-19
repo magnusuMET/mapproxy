@@ -1249,6 +1249,38 @@ class CacheConfiguration(ConfigurationBase):
             file_permissions=self.file_permissions()
         )
 
+    def _mbtiles_dimensions_cache(self, grid_conf, file_ext):
+        from mapproxy.cache.mbtiles import MBTilesDimensionsCache
+
+        dimensionlist = self.conf['cache'].get("dimensions")
+
+        cache_dir = self.conf['cache'].get('directory')
+        if cache_dir:
+            cache_dir = os.path.join(
+                self.context.globals.abspath(cache_dir),
+                self.conf['name'],
+                grid_conf.tile_grid().name
+            )
+        else:
+            cache_dir = self.cache_dir()
+            cache_dir = os.path.join(
+                cache_dir,
+                self.conf['name'],
+                grid_conf.tile_grid().name
+            )
+
+        sqlite_timeout = self.context.globals.get_value('cache.sqlite_timeout', self.conf)
+        wal = self.context.globals.get_value('cache.sqlite_wal', self.conf)
+        coverage = self.coverage()
+
+        return MBTilesDimensionsCache(
+            cache_dir,
+            timeout=sqlite_timeout,
+            wal=wal,
+            dimensionlist=dimensionlist,
+            coverage=coverage,
+        )
+
     def _geopackage_cache(self, grid_conf, image_opts):
         from mapproxy.cache.geopackage import GeopackageCache, GeopackageLevelCache
 

@@ -142,6 +142,13 @@ cache_types = {
         'directory_permissions': str(),
         'file_permissions': str(),
     }),
+    'mbtiles_dimensions': {
+        'directory': str(),
+        'sqlite_timeout': number(),
+        'sqlite_wal': bool(),
+        'tile_lock_dir': str(),
+        'dimensions': [str()],
+    },
     'geopackage': combined(cache_commons, {
         'filename': str(),
         'directory': str(),
