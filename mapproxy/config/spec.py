@@ -414,6 +414,7 @@ mapproxy_yaml_spec = {
                 'connection_string': str(),
                 'container_name': str(),
             },
+            'dimensions': [str()],
         },
         'grid': {
             'tile_size': [int()],
