@@ -133,9 +133,7 @@ def ensure_directory(file_name, directory_permissions=None):
 
         except OSError as e:
             if e.errno != errno.EEXIST:
-                raise e
-        except PermissionError as e:
-            raise Exception(f"Tried to create {dir_name} which failed: {e}")
+                raise Exception(f"Tried to create {dir_name} which failed: {e}")
 
 
 def write_atomic(filename, data):
