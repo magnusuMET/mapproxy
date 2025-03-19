@@ -117,6 +117,7 @@ def ensure_directory(file_name, directory_permissions=None):
     Create directory if it does not exist, else do nothing.
     """
     dir_name = os.path.dirname(file_name)
+    print(dir_name)
     if not os.path.isdir(dir_name):
         try:
             if dir_name == '.' or dir_name == '/':
