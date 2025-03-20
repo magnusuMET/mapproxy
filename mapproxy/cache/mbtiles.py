@@ -257,7 +257,10 @@ class MBTilesCache(TileCacheBase):
                 ['(tile_column = ? AND tile_row = ? AND zoom_level = ?)'] * (len(cur_coords) // 3)) + ')'
 
             cursor = self.db.cursor()
-            cursor.execute(stmt, cur_coords)
+            try:
+                cursor.execute(stmt, cur_coords)
+            except Exception as e:
+                raise Exception(f"stmt={stmt}\ndb={self.db}\n{e}")
 
             for row in cursor:
                 loaded_tiles += 1
