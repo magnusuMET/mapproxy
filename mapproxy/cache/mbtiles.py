@@ -121,6 +121,7 @@ class MBTilesCache(TileCacheBase):
             os.chmod(self.mbtile_file, permission)
 
     def update_metadata(self, name='', description='', version=1, overlay=True, format='png'):
+        return
         self.db.execute("""
             CREATE TABLE IF NOT EXISTS metadata (name text, value text);
         """)
